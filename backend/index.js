@@ -10,7 +10,7 @@ const app = express();
 
 //Option 2:
 app.use(cors({
-  origin: 'http://localhost:5173',
+  origin: `${import.meta.env.FRONTEND_URL}`,
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type']
 }));
