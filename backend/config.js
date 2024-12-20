@@ -1,3 +1,6 @@
-export const PORT = `${import.meta.env.PORT}`;
+import dotenv from "dotenv";
 
-export const mondoDBURL = `${import.meta.env.MONGODBURL}`
+dotenv.config();
+
+export const PORT = process.env.PORT;
+export const mondoDBURL = process.env.MONGODBURL;

@@ -5,15 +5,14 @@ import booksRoute from "./routes/booksRoute.js";
 import cors from "cors";
 
 const app = express();
-//Option 1:
-// app.use(cors());
 
-//Option 2:
-app.use(cors({
-  origin: `${import.meta.env.FRONTEND_URL}`,
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: ['Content-Type']
-}));
+app.use(
+  cors({
+    origin: process.env.FRONTEND_URL,
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type"],
+  })
+);
 
 app.use(express.json());
 
@@ -23,12 +22,14 @@ app.get("/", (req, res) => {
 
 app.use("/books", booksRoute);
 
-mongoose.connect(mondoDBURL, {  
-}).then(() => {console.log('MongoDB is Connected successfully!');
-  app.listen(PORT, () => {
-    console.log(`Server is running on port: ${PORT}`);
+mongoose
+  .connect(mondoDBURL)
+  .then(() => {
+    console.log("MongoDB is connected successfully!");
+    app.listen(PORT, () => {
+      console.log(`Server is running on port: ${PORT}`);
+    });
+  })
+  .catch((err) => {
+    console.log(err);
   });
-})
-.catch((err) => {
-  console.log(err)
-});
